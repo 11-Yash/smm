@@ -16,9 +16,9 @@ if ($conn->connect_error) {
 // Create the 'socialmediamanager' database
 $sqlCreateDatabase = "CREATE DATABASE IF NOT EXISTS socialmediamanager";
 if ($conn->query($sqlCreateDatabase) === TRUE) {
-    echo "Database 'socialmediamanager' created successfully\n";
+    // echo "Database 'socialmediamanager' created successfully\n";
 } else {
-    echo "Error creating database: " . $conn->error . "\n";
+    // echo "Error creating database: " . $conn->error . "\n";
     $conn->close();
     exit;
 }
@@ -86,9 +86,9 @@ if (
     $conn->query($sqlSupportTable) === TRUE &&
     $conn->query($sqlDoodleTable) === TRUE
 ) {
-    echo "Tables created successfully\n";
+    // echo "Tables created successfully\n";
 } else {
-    echo "Error creating tables: " . $conn->error . "\n";
+    // echo "Error creating tables: " . $conn->error . "\n";
 }
 
 // Close the database connection
