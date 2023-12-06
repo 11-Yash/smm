@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$mysqli = new mysqli("localhost", "root", "", "test");
+$mysqli = new mysqli("localhost", "root", "", "socialmediamanager");
 if ($mysqli->connect_error) {
     exit('Could not connect');
 }
