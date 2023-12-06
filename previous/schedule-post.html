@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+    <!-- FancyBox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Social Media Manager</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-offwhite sticky-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <img src="assets/img/social-media.png" height="25" alt="Logo" loading="lazy" />
+                </a>
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <h5 class="">Social Media Manager</h5>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <a class="text-dark me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        John Doe
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="#">My Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-12 bg-gray">
+                <div class="py-4 h100vh side-nav" id="side-nav">
+                    <a href="index.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="fa-solid fa-gauge me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Dashboard</li>
+                        </ul>
+                    </a>
+                    <a href="admin.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="far fa-user me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Admin</li>
+                        </ul>
+                    </a>
+                    <a href="users.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="far fa-user me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Users</li>
+                        </ul>
+                    </a>
+                    <a href="schedule-post.html" class="text-dark">
+                        <ul class="d-flex list-unstyled active">
+                            <li>
+                                <i class="fa-solid fa-photo-film me-2"></i>
+                            </li>
+                            <li class="text-dark">Schedule Post</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-9 col-sm-9 col-12 bg-white">
+                <div class="row pt2em">
+                    <div class="d-flex justify-content-between">
+                        <h1 class="">Schedule Post</h1>
+                        <div class="">
+                            <button class="btn btn-sm btn-primary" data-mdb-toggle="modal" data-mdb-target="#addPost">
+                                <i class="fa-solid fa-plus me-1"></i>
+                                Add Post
+                            </button>
+                            <button class="btn btn-sm btn-warning text-white">
+                                <i class="fa-solid fa-arrows-rotate ms-1"></i>
+                                Reset
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-mdb-toggle="modal" data-mdb-target="#deleteAll">
+                                <i class="fa-solid fa-trash ms-1"></i>
+                                Recycle Bin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="text-center table-secondary">
+                            <th class="">Sr</th>
+                            <th class="">Title</th>
+                            <th class="">Description</th>
+                            <th class="">Post</th>
+                            <th class="">Platforms</th>
+                            <th class="">Schedule Date</th>
+                            <th class="">Schedule Time</th>
+                            <th class="">Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td>Hello World</td>
+                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, ducimus?</td>
+                                <td>
+                                    <div class="">
+                                        <a data-fancybox="gallery" href="assets/img/not-found.svg">
+                                            <img src="assets/img/not-found.svg" width="50" class="img-fluid rounded"
+                                                alt="Image 1">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="" class="text-primary">
+                                        <i class="fab fa-facebook fa-lg text-primary"></i>
+                                    </a>,
+                                    <a href="" class="text-danger">
+                                        <i class="fab fa-instagram fa-lg text-danger"></i>
+                                    </a>,
+                                    <a href="" class="text-success">
+                                        <i class="fab fa-whatsapp fa-lg text-success"></i>
+                                    </a>,
+                                    <a href="" class="text-dark">
+                                        <i class="fa-brands fa-x-twitter fa-lg text-dark"></i>
+                                    </a>.
+                                </td>
+                                <td>
+                                    <span>01 Jan 2024</span>
+                                </td>
+                                <td>
+                                    <span>12:00 pm</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="#" class="update btn btn-warning btn-sm mx-1" data-mdb-toggle="modal"
+                                            data-mdb-target="#editUser">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a href="#" class="delete btn btn-danger btn-sm mx-1" data-mdb-toggle="modal"
+                                            data-mdb-target="#deleteUserModal">
+                                            <i class="fas fa-trash-alt text-white"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Post -->
+    <div class="modal fade" id="addPost" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPostLabel">Add Post</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+
+                        <form action="">
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="title">
+                                    Title
+                                </label>
+                                <input id="title" type="text" name="title" required="" class="form-control validate">
+                            </div>
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="description">
+                                    Description
+                                </label>
+                                <textarea class="form-control" id="description" rows="2"></textarea>
+                            </div>
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="platforms">
+                                    Platforms
+                                </label>
+                                <select class="" id="platforms" multiple="multiple" style="width: 100%;">
+                                    <!-- <option value="all">All</option> -->
+                                    <option value="1">Facebook</option>
+                                    <option value="2">Whatsapp</option>
+                                    <option value="3">Instagram</option>
+                                    <option value="3">Twitter X</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-around">
+                                <div class="md-form my-3 w-100">
+                                    <label class="form-control-label" for="date">
+                                        Date
+                                    </label>
+                                    <input id="date" type="date" name="date" required="" class="form-control validate">
+                                </div>
+
+                                <div class="md-form my-3 w-100 ms-3">
+                                    <label class="form-control-label" for="time">
+                                        Time
+                                    </label>
+                                    <input id="time" type="time" name="time" required="" class="form-control validate">
+                                </div>
+                            </div>
+
+                            <div class="md-form">
+                                <label class="form-control-label" for="post">
+                                    Post
+                                </label>
+                                <input id="post" type="file" name="post" required="" class="form-control validate">
+                                <div class="text-center">
+                                    <!-- <img src="assets/img/not-found.svg" alt="Image" class="img-fluid" loading="lazy"
+                                        width="150" /> -->
+                                    <video controls src="assets/video/video.mp4" type="video/mp4" width="250"
+                                        height="200"></video>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete All -->
+    <div class="modal fade" id="deleteAll" tabindex="-1" aria-labelledby="deleteAllLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAllLabel">Delete All</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center pt-5 text-danger"><i class="fas fa-trash-alt fa-3x "></i>
+                        <h3 class="w-100 text-danger">Are you sure?</h3>
+                        <p class="">
+                            You want to delete.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger">Yes delete it.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User -->
+    <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <form action="">
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="edit-title">
+                                    Title
+                                </label>
+                                <input id="edit-title" type="text" name="edit-title" required=""
+                                    class="form-control validate">
+                            </div>
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="edit-description">
+                                    Description
+                                </label>
+                                <textarea class="form-control" id="edit-description" rows="2"></textarea>
+                            </div>
+
+                            <div class="md-form my-3">
+                                <label class="form-control-label" for="edit-platforms">
+                                    Platforms
+                                </label>
+                                <select class="" id="edit-platforms" multiple="multiple" style="width: 100%;">
+                                    <!-- <option value="all">All</option> -->
+                                    <option value="1">Facebook</option>
+                                    <option value="2">Whatsapp</option>
+                                    <option value="3">Instagram</option>
+                                    <option value="3">Twitter X</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-around">
+                                <div class="md-form my-3 w-100">
+                                    <label class="form-control-label" for="edit-date">
+                                        Date
+                                    </label>
+                                    <input id="edit-date" type="date" name="edit-date" required=""
+                                        class="form-control validate">
+                                </div>
+
+                                <div class="md-form my-3 w-100 ms-3">
+                                    <label class="form-control-label" for="edit-time">
+                                        Time
+                                    </label>
+                                    <input id="edit-time" type="time" name="edit-time" required=""
+                                        class="form-control validate">
+                                </div>
+                            </div>
+
+                            <div class="md-form">
+                                <label class="form-control-label" for="edit-post">
+                                    Post
+                                </label>
+                                <input id="edit-post" type="file" name="edit-post" required=""
+                                    class="form-control validate">
+                                <div class="text-center">
+                                    <!-- <img src="assets/img/not-found.svg" alt="Image" class="img-fluid" loading="lazy"
+                                                            width="150" /> -->
+                                    <video controls src="assets/video/video.mp4" type="video/mp4" width="250"
+                                        height="200"></video>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-warning">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete User -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center pt-5 text-danger"><i class="fas fa-trash-alt fa-3x "></i>
+                        <h3 class="w-100 text-danger">Are you sure?</h3>
+                        <p class="">
+                            You want to delete.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger">Yes delete it this user.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Select2 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+    <!-- FancyBox -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <!-- Js -->
+    <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>

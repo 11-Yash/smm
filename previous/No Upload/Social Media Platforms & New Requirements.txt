@@ -1,0 +1,13 @@
+Social Media Platforms:
+Facebook
+Instagram
+X (Twitter)
+YouTube
+Pinterest
+LinkedIn
+
+Extra Features:
+1) Social Media Account Login
+2) Suggested Posts (Hashtags will be stored in a seperate table from description field of Add Post and these hashtags will be visible in a sepearate page)
+3) Support Page (Users can add feedback / suggestion and this will be visible on admin panel)
+4) Doodle Option (Admins can change Doodle from Admin Panel and accordingly logo will be changed on Mobile App)

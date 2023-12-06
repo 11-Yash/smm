@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+    <!-- Css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Social Media Manager</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-offwhite sticky-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <img src="assets/img/social-media.png" height="25" alt="Logo" loading="lazy" />
+                </a>
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <h5 class="">Social Media Manager</h5>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <a class="text-dark me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        John Doe
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="#">My Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-12 bg-gray">
+                <div class="py-4 h100vh side-nav" id="side-nav">
+                    <a href="index.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="fa-solid fa-gauge me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Dashboard</li>
+                        </ul>
+                    </a>
+                    <a href="admin.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="far fa-user me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Admin</li>
+                        </ul>
+                    </a>
+                    <a href="users.html" class="text-dark">
+                        <ul class="d-flex list-unstyled active">
+                            <li>
+                                <i class="far fa-user me-2 text-dark"></i>
+                            </li>
+                            <li>Users</li>
+                        </ul>
+                    </a>
+                    <a href="schedule-post.html" class="text-dark">
+                        <ul class="d-flex list-unstyled">
+                            <li>
+                                <i class="fa-solid fa-photo-film me-2 text-white"></i>
+                            </li>
+                            <li class="text-white">Schedule Post</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-9 col-sm-9 col-12 bg-white">
+                <div class="row pt2em">
+                    <div class="d-flex justify-content-between">
+                        <h1 class="">Users</h1>
+                        <div class="">
+                            <button class="btn btn-sm btn-primary" data-mdb-toggle="modal" data-mdb-target="#addUsers">
+                                <i class="fa-solid fa-plus me-1"></i>
+                                Add Users
+                            </button>
+                            <button class="btn btn-sm btn-warning text-white">
+                                <i class="fa-solid fa-arrows-rotate ms-1"></i>
+                                Reset
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-mdb-toggle="modal" data-mdb-target="#deleteAll">
+                                <i class="fa-solid fa-trash ms-1"></i>
+                                Recycle Bin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="text-center table-secondary">
+                            <th>Sr</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>
+                                    <a href="mailto:example@email.com" class="text-dark">
+                                        <span class="badge badge-danger p-2">
+                                            <i class="fa-regular fa-envelope fa-lg"></i>
+                                        </span>
+                                        john@gmail.com
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="tel:9112345678" class="text-dark">
+                                        <span class="badge badge-success p-2">
+                                            <i class="fa-solid fa-mobile-screen-button fa-lg"></i>
+                                        </span>
+                                        +91 12345 67890
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="update btn btn-warning btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#editUserModal">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="#" class="delete btn btn-danger btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#deleteUserModal">
+                                        <i class="fas fa-trash-alt text-white"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>2</td>
+                                <td>Patricia</td>
+                                <td>Moss</td>
+                                <td>
+                                    <a href="mailto:example@email.com" class="text-dark">
+                                        <span class="badge badge-danger p-2">
+                                            <i class="fa-regular fa-envelope fa-lg"></i>
+                                        </span>
+                                        john@gmail.com
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="tel:9112345678" class="text-dark">
+                                        <span class="badge badge-success p-2">
+                                            <i class="fa-solid fa-mobile-screen-button fa-lg"></i>
+                                        </span>
+                                        +91 12345 67890
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="update btn btn-warning btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#editUserModal">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="#" class="delete btn btn-danger btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#deleteUserModal">
+                                        <i class="fas fa-trash-alt text-white"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>3</td>
+                                <td>Julie</td>
+                                <td>Romero</td>
+                                <td>
+                                    <a href="mailto:example@email.com" class="text-dark">
+                                        <span class="badge badge-danger p-2">
+                                            <i class="fa-regular fa-envelope fa-lg"></i>
+                                        </span>
+                                        john@gmail.com
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="tel:9112345678" class="text-dark">
+                                        <span class="badge badge-success p-2">
+                                            <i class="fa-solid fa-mobile-screen-button fa-lg"></i>
+                                        </span>
+                                        +91 12345 67890
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="update btn btn-warning btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#editUserModal">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="#" class="delete btn btn-danger btn-sm mx-1" data-mdb-toggle="modal"
+                                        data-mdb-target="#deleteUserModal">
+                                        <i class="fas fa-trash-alt text-white"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Users -->
+    <div class="modal fade" id="addUsers" tabindex="-1" aria-labelledby="addUsersLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUsersLabel">Add Users</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <form>
+                            <div class="d-flex justify-content-between my-2">
+                                <div class="md-form">
+                                    <label class="form-control-label" for="firstName">
+                                        First Name
+                                    </label>
+                                    <input id="firstName" type="text" name="firstName" required=""
+                                        class="form-control validate">
+                                </div>
+                                <div class="md-form">
+                                    <label class="form-control-label" for="lastName">
+                                        Last Name
+                                    </label>
+                                    <input id="lastName" type="text" name="lastName" required=""
+                                        class="form-control validate">
+                                </div>
+                            </div>
+
+                            <div class="md-form my-2">
+                                <label class="form-control-label" for="email">
+                                    Email
+                                </label>
+                                <input id="email" type="email" name="email" required="" class="form-control validate">
+                            </div>
+
+                            <div class="md-form my-2">
+                                <label class="form-control-label" for="phone">
+                                    Phone
+                                </label>
+                                <input id="phone" type="number" name="phone" required="" class="form-control validate">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete All -->
+    <div class="modal fade" id="deleteAll" tabindex="-1" aria-labelledby="deleteAllLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAllLabel">Delete All</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center pt-5 text-danger"><i class="fas fa-trash-alt fa-3x "></i>
+                        <h3 class="w-100 text-danger">Are you sure?</h3>
+                        <p class="">
+                            You want to delete.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger">Yes delete it.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <form>
+                            <div class="d-flex justify-content-between my-2">
+                                <div class="md-form">
+                                    <label class="form-control-label" for="edit-firstName">
+                                        First Name
+                                    </label>
+                                    <input id="edit-firstName" type="text" name="edit-firstName" required=""
+                                        class="form-control validate">
+                                </div>
+                                <div class="md-form">
+                                    <label class="form-control-label" for="edit-lastName">
+                                        Last Name
+                                    </label>
+                                    <input id="edit-lastName" type="text" name="edit-lastName" required=""
+                                        class="form-control validate">
+                                </div>
+                            </div>
+
+                            <div class="md-form my-2">
+                                <label class="form-control-label" for="edit-email">
+                                    Email
+                                </label>
+                                <input id="edit-email" type="email" name="edit-email" required=""
+                                    class="form-control validate">
+                            </div>
+
+                            <div class="md-form my-2">
+                                <label class="form-control-label" for="edit-phone">
+                                    Phone
+                                </label>
+                                <input id="edit-phone" type="number" name="edit-phone" required=""
+                                    class="form-control validate">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-warning">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete User -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center pt-5 text-danger"><i class="fas fa-trash-alt fa-3x "></i>
+                        <h3 class="w-100 text-danger">Are you sure?</h3>
+                        <p class="">
+                            You want to delete.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger">Yes delete it this user.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+    <!-- Js -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

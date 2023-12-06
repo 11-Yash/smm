@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Scrollbar Start */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2f2f2f;
+}
+
+::selection {
+  color: #fff;
+  background: #2f2f2f;
+}
+
+body {
+  overflow: hidden;
+}
+
+.navbar-brand img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+/* ===== Sidebar ===== */
+.main-container {
+  min-height: 93.6vh;
+}
+
+.bg-dark {
+  background: #2f2f2f !important;
+}
+
+.sidebar .nav-item a.nav-link {
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.sidebar .nav-item a.nav-link:hover {
+  color: #000;
+  background: #fff;
+}
+
+.sidebar .nav-item a.nav-link.active {
+  color: #000;
+  background: #fff;
+}
+
+.dashboard-card:hover {
+  transform: translate(3px, -3px);
+  transition: all 0.5s ease;
+}
