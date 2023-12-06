@@ -1,5 +1,5 @@
-<?php include('required/config.php'); ?>
 <?php include('required/database.php'); ?>
+<?php include('required/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
