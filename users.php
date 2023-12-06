@@ -12,6 +12,23 @@
 <body>
     <?php include('required/navbar.php'); ?>
 
+
+
+
+    <?php
+    if(isset($_POST['srno']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['contact'])) {
+        $id = secure($_POST['id']);
+        $fname = secure($_POST['fname']);
+        $lname = secure($_POST['lname']);
+        $email = secure($_POST['email']);
+        $contact = secure($_POST['contact']);
+    }
+    ?>
+
+
+
+
+
     <div class="container-fluid">
         <div class="row main-container">
             <?php include('required/sidebar.php'); ?>
@@ -42,17 +59,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@gmail.com</td>
-                                    <td>1234567890</td>
+                                <?php 
+                                    $sql = "SELECT * FROM `users`";
+                                    $result = $mysqli->query($sql);
+                                    $sr=0;
+                                    while($row = $result->fetch_object()) {
+                                        $sr++;
+                                    ?>
+                                <tr>   
+                                    <td><?= $sr ?></td>
+                                    <td><?= $row->fname ?></td>
+                                    <td><?= $row->lname ?></td>
+                                    <td><?= $row->email ?></td>
+                                    <td><?= $row->contact ?></td>
                                     <td>
                                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='1' data-fname='Saqib' data-lname='Ghatte' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='1' data-title='Saqib Ghatte'><i class="fa-solid fa-trash"></i></button>
                                     </td>
-                                </tr>
+                                </tr><?php } ?>
                             </tbody>
                         </table>
                     </div>
