@@ -12,22 +12,43 @@
 <body>
     <?php include('required/navbar.php'); ?>
 
-
-
-
     <?php
-    if(isset($_POST['srno']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['contact'])) {
-        $id = secure($_POST['id']);
+    if(isset($_POST['modifyID']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['contact'])) {
+        $id = secure($_POST['modifyID']);
         $fname = secure($_POST['fname']);
         $lname = secure($_POST['lname']);
         $email = secure($_POST['email']);
         $contact = secure($_POST['contact']);
+        $password = secure($_POST['password']);
+    
+    if(empty($id)) {
+        $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
+        if ($mysqli->query($sql)) {
+            $_SESSION['success'] = "User Added Successfully";
+        } else {
+            $_SESSION['error'] = "Something Went Wrong";
+        }
+    } else {
+        $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
+        if ($mysqli->query($sql)) {
+            $_SESSION['success'] = "User Updated Successfully";
+        } else {
+            $_SESSION['error'] = "Something Went Wrong";
+        }
     }
+    }
+
+    if (isset($_POST['deleteId'])) {
+        $id = secure($_POST['deleteId']);
+        $sql = "DELETE FROM `users` WHERE `srno`='$id'";
+        if ($mysqli->query($sql)) {
+            $_SESSION['success'] = "User Deleted Successfully";
+        } else {
+            $_SESSION['error'] = "Something Went Wrong";
+        }
+    }
+
     ?>
-
-
-
-
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -73,8 +94,8 @@
                                     <td><?= $row->email ?></td>
                                     <td><?= $row->contact ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='1' data-fname='Saqib' data-lname='Ghatte' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='1' data-title='Saqib Ghatte'><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->id ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>' data-contact='<?= $row->contact ?>'><i class="fa-solid fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr><?php } ?>
                             </tbody>
@@ -173,6 +194,7 @@
             var lname = button.data('lname')
             var email = button.data('email')
             var contact = button.data('contact')
+            var password = button.data('password')
             var modal = $(this)
 
             modal.find('.modal-title').text((id == 0 || id == undefined) ? 'Add User' : "Edit User")
@@ -181,7 +203,18 @@
             modal.find('.modal-body #lname').val(lname)
             modal.find('.modal-body #email').val(email)
             modal.find('.modal-body #contact').val(contact)
+            modal.find('.modal-body #password').val(password)
             modal.find('.modal-footer button[name=submit]').text((id == 0 || id == undefined) ? 'Save' : "Update")
+        })
+        // On Delete Button Click
+        $('#deleteDataModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var title = button.data('title')
+            var modal = $(this)
+
+            modal.find('.modal-body #title').text(title)
+            modal.find('.modal-body input[name=deleteId]').val(id)
         })
     </script>
 </body>
