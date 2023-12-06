@@ -1,3 +1,5 @@
+<?php include('required/database.php'); ?>
+
 <?php
 session_start();
 
