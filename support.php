@@ -11,6 +11,17 @@
 
 <body>
     <?php include('required/navbar.php'); ?>
+    <?php
+    if (isset($_POST['deleteId'])) {
+        $id = secure($_POST['deleteId']);
+        $sql = "DELETE FROM `support` WHERE `srno`='$id'";
+        if ($mysqli->query($sql)) {
+            $_SESSION['success'] = "Record Deleted Successfully";
+        } else {
+            $_SESSION['error'] = "Something Went Wrong";
+        }
+    }
+    ?>
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -48,12 +59,12 @@
                                         $sr++;
                                     ?>
                                 <tr>
-                                    <td><?php $sr ?></td>
-                                    <td><?php $row->name ?></td>
-                                    <td><?php $row->contact ?></td>
-                                    <td><?php $row->email ?></td>
-                                    <td><?php $row->subject ?></td>
-                                    <td><?php $row->message ?></td>
+                                    <td><?= $sr ?></td>
+                                    <td><?= $row->name ?></td>
+                                    <td><?= $row->contact ?></td>
+                                    <td><?= $row->email ?></td>
+                                    <td><?= $row->subject ?></td>
+                                    <td><?= $row->message ?></td>
                                     <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button></td>
                                 </tr><?php } ?>
                             </tbody>
@@ -109,6 +120,16 @@
         //     modal.find('.modal-body #contact').val(contact)
         //     modal.find('.modal-footer button[name=submit]').text((id == 0 || id == undefined) ? 'Save' : "Update")
         // })
+        // On Edit Button Click
+        $('#deleteDataModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var title = button.data('title')
+            var modal = $(this)
+
+            modal.find('.modal-body #title').text(title)
+            modal.find('.modal-body input[name=deleteId]').val(id)
+        })
     </script>
 </body>
 
