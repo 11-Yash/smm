@@ -40,21 +40,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $sql = "SELECT * FROM `support`";
+                                    $result = $mysqli->query($sql);
+                                    $sr=0;
+                                    while($row = $result->fetch_object()) {
+                                        $sr++;
+                                    ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>+91 12345 68980</td>
-                                    <td>
-                                        john@gmail.com
-                                    </td>
-                                    <td>
-                                        Message
-                                    </td>
-                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo atque rem, officia officiis cum deserunt?</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='1' data-title='Saqib Ghatte'><i class="fa-solid fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                    <td><?php $sr ?></td>
+                                    <td><?php $row->name ?></td>
+                                    <td><?php $row->contact ?></td>
+                                    <td><?php $row->email ?></td>
+                                    <td><?php $row->subject ?></td>
+                                    <td><?php $row->message ?></td>
+                                    <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button></td>
+                                </tr><?php } ?>
                             </tbody>
                         </table>
                     </div>
