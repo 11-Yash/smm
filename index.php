@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <!-- <h1>BODY</h1> -->
+    <h1>BODY by varad</h1>
     <?php include('required/navbar.php'); ?>
 
     <div class="container-fluid">
