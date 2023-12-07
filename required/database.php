@@ -53,10 +53,18 @@ CREATE TABLE IF NOT EXISTS users (
 $sqlSocialMediaPostsTable = "
 CREATE TABLE IF NOT EXISTS socialmediaposts (
     srno INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    description TEXT
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    post VARCHAR(255) NOT NULL,
+    platform TEXT NOT NULL,
+    schdate DATE NOT NULL,
+    schtime TIME NOT NULL,
+    date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 ";
+
+
 $sqlTrendingTable = "
 CREATE TABLE IF NOT EXISTS trending (
     srno INT AUTO_INCREMENT PRIMARY KEY,
