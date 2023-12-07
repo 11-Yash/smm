@@ -63,12 +63,7 @@
             }
         }
     }
-    //sorting the hastags
-    arsort($hashtags);
-    $srno = 1;
-    foreach ($hashtags as $tag => $count) {
-        $srno++;
-    }?>
+    ?>
 
     <?php
     $sql = "SELECT COUNT(*) AS supportCount FROM `support`";
@@ -130,7 +125,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-hashtag float-end"></i>
-                                <h1><?php echo $srno=$srno-1; ?></h1>
+                                <h1><?php echo count($hashtags); ?></h1>
                                 <p>Hashtags</p>
                             </div>
                         </div>
