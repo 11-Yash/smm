@@ -23,6 +23,8 @@
         echo "Error: " . $mysqli->error;
     }?>
 
+    <!-- Post count PHP here -->
+
     <?php
     $sql = "SELECT COUNT(*) AS adminCount FROM `admins`";
     $result = $mysqli->query($sql);
@@ -31,6 +33,33 @@
         $adminCount = $row['adminCount'];
     } else {
         echo "Error: " . $mysqli->error;
+    }?>
+
+    <?php                         
+    $sql = "SELECT description FROM socialmediaposts";
+    $result = $mysqli->query($sql);
+    $hashtags = array();
+    // Process each row of the result set
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            // Extract hashtags using a regular expression
+            preg_match_all('/#(\w+)/', $row['description'], $matches);      
+            // Count and store hashtags in the array
+            foreach ($matches[1] as $tag) {
+                $tag = strtolower($tag);
+                if (isset($hashtags[$tag])) {
+                    $hashtags[$tag]++;
+                } else {
+                    $hashtags[$tag] = 1;
+                }
+            }
+        }
+    }
+    //sorting the hastags
+    arsort($hashtags);
+    $srno = 1;
+    foreach ($hashtags as $tag => $count) {
+        $srno++;
     }?>
 
     <?php
@@ -42,6 +71,8 @@
     } else {
         echo "Error: " . $mysqli->error;
     }?>
+
+    <!-- Doodle count PHP here -->
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -81,7 +112,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-hashtag float-end"></i>
-                                <h1>NO DB</h1>
+                                <h1><?php echo $srno=$srno-1; ?></h1>
                                 <p>Hashtags</p>
                             </div>
                         </div>

@@ -64,7 +64,7 @@
 
                                 $srno = 1;
                                 foreach ($hashtags as $tag => $count) {
-                                    echo '<tr><td>' . $srno . '</td><td>' . $tag . '</td><td>' . $count . '</td></tr>';
+                                    echo '<tr><td>' . $srno . '</td><td>#' . $tag . '</td><td>' . $count . '</td></tr>';
                                     $srno++;
                                 }
                                 
