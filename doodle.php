@@ -44,6 +44,7 @@ include('required/config.php');
         }}
             if (isset($_POST['deleteId'])) {
             $id = secure($_POST['deleteId']);
+            //deletion of image starts here
             $getpathsql = "SELECT image_path FROM doodle WHERE srno = '$id'";
             $result = $mysqli->query($getpathsql);
             if ($result) {
@@ -61,7 +62,8 @@ include('required/config.php');
                 }
             } else {
                 echo "Error executing query: " . $mysqli->error;
-            }            
+            }
+            //ends here            
             $sql = "DELETE FROM doodle WHERE srno='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Doodle Deleted Successfully";
