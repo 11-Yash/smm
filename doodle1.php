@@ -87,7 +87,7 @@ include('required/config.php');
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row-> id ?>' data-name='<?= $row->name ?>' data-lname='<?= $row->image_path ?>' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row-> srno ?>' data-name='<?= $row->name ?>' data-lname='<?= $row->image_path ?>' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>
