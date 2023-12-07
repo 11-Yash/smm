@@ -72,7 +72,15 @@
         echo "Error: " . $mysqli->error;
     }?>
 
-    <!-- Doodle count PHP here -->
+    <?php
+    $sql = "SELECT COUNT(*) AS doodleCount FROM doodle";
+    $result = $mysqli->query($sql);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $doodleCount = $row['doodleCount'];
+    } else {
+        echo "Error: " . $mysqli->error;
+    }?>
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -130,7 +138,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-pen-nib float-end"></i>
-                                <h1>NO DB</h1>
+                                <h1><?php echo $doodleCount ?></h1>
                                 <p>Doodles</p>
                             </div>
                         </div>
