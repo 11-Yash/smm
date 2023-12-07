@@ -14,14 +14,21 @@ include('required/config.php');
 
 <body>
     <?php include('required/navbar.php');
-        if (isset($_POST['modifyID']) && isset($_POST['name']) && isset($_POST['doodle'])) {
+        if (isset($_FILES['doodle']) && isset($_POST['modifyID']) && isset($_POST['name'])) {
             $id = secure($_POST['modifyID']);
             $name = secure($_POST['name']);
-            $image_path = secure($_POST['doodle']);
-    
+            $image_tmp = $_FILES['doodle']['tmp_name']; // Temporary file name
+            $image_name = $_FILES['doodle']['name']; // Original file name
+        
+            $image_path = "assets/doodle/" . uniqid() ."_". $image_name; // Destination path + original file name
+        
             if (empty($id)) {
                 $sql = "INSERT INTO doodle(name, image_path) VALUES ('$name','$image_path')";
-
+                if (move_uploaded_file($image_tmp, $image_path)) {
+                    // File moved successfully
+                } else {
+                    // Error moving file
+                }
             } else {
                 $sql = "UPDATE doodle SET name='$name',image_path='$image_path' WHERE srno='$id'";
             }
@@ -87,7 +94,7 @@ include('required/config.php');
                                     <input type="hidden" name="modifyID" id="modifyID" value='0'>
                                         <div class="">
                                             <a data-fancybox="post" href="<?= $row->image_path ?> ">
-                                                <img src=<?= $row->image_path ?>  class="img-fluid rounded" alt="Image 1" width="50" />
+                                                <img src=<?= $row->image_path ?>  class="img-fluid rounded" onerror="this.onerror=null; this.src='assets/img/image_not_found.png';" width="50" />
                                             </a>
                                         </div>
                                     </td>
@@ -117,7 +124,7 @@ include('required/config.php');
                     <h5 class="modal-title" id="modalTitleId">Add Doodle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
