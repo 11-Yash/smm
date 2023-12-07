@@ -1,4 +1,6 @@
 <?php include('required/config.php'); ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,22 @@
 </head>
 
 <body>
-    <?php include('required/navbar.php'); ?>
+    <?php include('required/navbar.php');
+    
+    $sql = "SELECT COUNT(*) AS userCount FROM `users`";
+    $result = $mysqli->query($sql);
+
+    if ($result) {
+    // Fetch the result as an associative array
+        $row = $result->fetch_assoc();
+
+    // Get the count of users
+        $userCount = $row['userCount'];
+
+} else {
+    // Handle the query error
+    echo "Error: " . $mysqli->error;
+}?>
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -23,7 +40,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-users float-end"></i>
-                                <h1>300</h1>
+                                <h1><?php echo $userCount ?></h1>
                                 <p>Users</p>
                             </div>
                         </div>
