@@ -12,22 +12,36 @@
 </head>
 
 <body>
-    <?php include('required/navbar.php');
-    
+    <?php include('required/navbar.php'); ?>
+    <?php
     $sql = "SELECT COUNT(*) AS userCount FROM `users`";
     $result = $mysqli->query($sql);
-
     if ($result) {
-    // Fetch the result as an associative array
         $row = $result->fetch_assoc();
-
-    // Get the count of users
         $userCount = $row['userCount'];
+    } else {
+        echo "Error: " . $mysqli->error;
+    }?>
 
-} else {
-    // Handle the query error
-    echo "Error: " . $mysqli->error;
-}?>
+    <?php
+    $sql = "SELECT COUNT(*) AS adminCount FROM `admins`";
+    $result = $mysqli->query($sql);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $adminCount = $row['adminCount'];
+    } else {
+        echo "Error: " . $mysqli->error;
+    }?>
+
+    <?php
+    $sql = "SELECT COUNT(*) AS supportCount FROM `support`";
+    $result = $mysqli->query($sql);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $supportCount = $row['supportCount'];
+    } else {
+        echo "Error: " . $mysqli->error;
+    }?>
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -49,7 +63,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-images float-end"></i>
-                                <h1>300</h1>
+                                <h1>NO DB</h1>
                                 <p>Social Media Posts</p>
                             </div>
                         </div>
@@ -58,7 +72,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-user-tie float-end"></i>
-                                <h1>300</h1>
+                                <h1><?php echo $adminCount ?></h1>
                                 <p>Admins</p>
                             </div>
                         </div>
@@ -67,7 +81,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-hashtag float-end"></i>
-                                <h1>300</h1>
+                                <h1>NO DB</h1>
                                 <p>Hashtags</p>
                             </div>
                         </div>
@@ -76,7 +90,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-circle-info float-end"></i>
-                                <h1>300</h1>
+                                <h1><?php echo $supportCount ?></h1>
                                 <p>Support</p>
                             </div>
                         </div>
@@ -85,7 +99,7 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-pen-nib float-end"></i>
-                                <h1>300</h1>
+                                <h1>NO DB</h1>
                                 <p>Doodles</p>
                             </div>
                         </div>
