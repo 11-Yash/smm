@@ -25,6 +25,8 @@
             $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Added Successfully";
+                header("Location: users.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -32,6 +34,8 @@
             $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Updated Successfully";
+                header("Location: users.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -43,6 +47,8 @@
         $sql = "DELETE FROM `users` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
             $_SESSION['success'] = "User Deleted Successfully";
+            header("Location: users.php");
+            exit();
         } else {
             $_SESSION['error'] = "Something Went Wrong";
         }

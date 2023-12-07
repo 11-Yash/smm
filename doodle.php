@@ -30,6 +30,8 @@ include('required/config.php');
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Successfully";
+                header("Location: doodle.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -44,6 +46,8 @@ include('required/config.php');
             $sql = "DELETE FROM doodle WHERE srno='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Doodle Deleted Successfully";
+                header("Location: doodle.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
