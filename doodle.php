@@ -24,11 +24,7 @@ include('required/config.php');
         
             if (empty($id)) {
                 $sql = "INSERT INTO doodle(name, image_path) VALUES ('$name','$image_path')";
-                if (move_uploaded_file($image_tmp, $image_path)) {
-                    // File moved successfully
-                } else {
-                    // Error moving file
-                }
+                
             } else {
                 $sql = "UPDATE doodle SET name='$name',image_path='$image_path' WHERE srno='$id'";
             }
@@ -39,7 +35,9 @@ include('required/config.php');
             }
             
            }
-
+           if (move_uploaded_file($image_tmp, $image_path)) {
+            // File moved successfully
+            }
             if (isset($_POST['deleteId'])) {
             $id = secure($_POST['deleteId']);
             $sql = "DELETE FROM doodle WHERE srno='$id'";
