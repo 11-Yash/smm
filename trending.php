@@ -36,27 +36,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>#Development</td>
-                                    <td class="">
-                                        1235+
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>#WebDevelopment</td>
-                                    <td class="">
-                                        6432+
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>#AppDevelopment</td>
-                                    <td class="">
-                                        6512+
-                                    </td>
-                                </tr>
+                                <?php
+                                
+                                $sql = "SELECT description FROM socialmediaposts";
+                                $result = $mysqli->query($sql);
+                                $hashtags = array();
+                                // Process each row of the result set
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        // Extract hashtags using a regular expression
+                                        preg_match_all('/#(\w+)/', $row['description'], $matches);
+                                    
+                                        // Count and store hashtags in the array
+                                        foreach ($matches[1] as $tag) {
+                                            $tag = strtolower($tag);
+                                            if (isset($hashtags[$tag])) {
+                                                $hashtags[$tag]++;
+                                            } else {
+                                                $hashtags[$tag] = 1;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                //sorting the hastags
+                                arsort($hashtags);
+
+                                $srno = 1;
+                                foreach ($hashtags as $tag => $count) {
+                                    echo '<tr><td>' . $srno . '</td><td>' . $tag . '</td><td>' . $count . '</td></tr>';
+                                    $srno++;
+                                }
+                                
+                                ?>
                             </tbody>
                         </table>
                     </div>
