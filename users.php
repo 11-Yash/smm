@@ -1,4 +1,5 @@
-<?php include('required/config.php'); ?>
+<?php include('required/config.php'); //demo?>
+
 <!DOCTYPE html>
 <html lang="en">
 
