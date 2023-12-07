@@ -31,7 +31,7 @@
             if (empty($password)) {
                 $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email' WHERE `srno`='$id'";
             } else {
-                $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email',`password`='$password' WHERE `id`='$id'";
+                $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email',`password`='$password' WHERE `srno`='$id'";
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Admin Updated Successfully";
@@ -120,7 +120,7 @@
                     <h5 class="modal-title" id="modalTitleId">addDataModalmin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="submit_admins.php">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
