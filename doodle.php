@@ -30,8 +30,7 @@ include('required/config.php');
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Successfully";
-                header("Location: doodle.php");
-                exit();
+                
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -39,6 +38,8 @@ include('required/config.php');
            }
            if(isset($image_path)){
            if (move_uploaded_file($image_tmp, $image_path)) {
+            header("Location: doodle.php");
+                exit();
             
         }}
             if (isset($_POST['deleteId'])) {
