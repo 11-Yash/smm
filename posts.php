@@ -11,34 +11,36 @@
 
 <body>
     <?php include('required/navbar.php');
-        if (isset($_FILES['post']) && isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['scheduleDate']) && isset($_POST['scheduleTime']) && isset($_POST['platform'])) {
+            var_dump($_POST);
+        
+        if (isset($_POST['modifyID']) && isset($_FILES['post']) && isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['scheduleDate']) && isset($_POST['scheduleTime'])) { // && isset($_POST['platform'])
+            var_dump($_POST);
             $id = secure($_POST['modifyID']);
             $title = secure($_POST['title']);
             $desc = secure($_POST['desc']);
             $scheduleDate = secure($_POST['scheduleDate']);
             $scheduleTime = secure($_POST['scheduleTime']);
-            $platform = secure($_POST['platform']);
+            // $platform = secure($_POST['platform']);
             $image_tmp = $_FILES['post']['tmp_name']; // Temporary file name
             $image_name = $_FILES['post']['name']; // Original file name
         
-            $image_path = "assets/post/" . uniqid() ."_". $image_name; // Destination path + original file name
+            $image_path = "assets/post/" . uniqid() ."_". $image_name; 
         
             if (empty($id)) {
-                $sql = "INSERT INTO socialmediaposts(title, description, post, schdate, schtime, platform) VALUES ('$title','$desc','$imagepath','$scheduleDate','$scheduleTime','$platform')";
-                
+                $sql = "INSERT INTO socialmediaposts(title, description, post, schdate, schtime) VALUES ('$title','$desc','$image_path','$scheduleDate','$scheduleTime')"; //,'$platform'    , platform
             } else {
                 if (empty($image_name)){
-                    $sql = "UPDATE socialmediaposts SET title='$tile', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime', platform='$platform' WHERE srno='$id'";
+                    $sql = "UPDATE socialmediaposts SET title='$tile', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime', platform='$platform' WHERE srno='$id'";                    
                 }
                 else{
                 $sql = "SELECT post FROM socialmediaposts WHERE srno='$id'";
                 $result = $mysqli->query($sql);
-                if ($result) {
-                    $row = $result->fetch_assoc();
+                    if ($result) {
+                        $row = $result->fetch_assoc();
                     $old_image = $row['post'];
                 
-                    if (file_exists($old_image)) {
-                        if (unlink($old_image)) {
+                        if (file_exists($old_image)) {
+                            if (unlink($old_image)) {
                             echo 'File deleted successfully.';
                         } else {
                             echo 'Unable to delete the file.';
@@ -92,7 +94,7 @@
             $sql = "DELETE FROM socialmediaposts WHERE srno='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "post Deleted Successfully";
-                header("Location: post.php");
+                header("Location: posts.php");
                 exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
