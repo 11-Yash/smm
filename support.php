@@ -13,6 +13,8 @@
     <?php include('required/navbar.php'); ?>
     <?php
     if (isset($_POST['deleteId'])) {
+        var_dump($_POST);
+
         $id = secure($_POST['deleteId']);
         $sql = "DELETE FROM `support` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
@@ -65,7 +67,7 @@
                                     <td><?= $row->email ?></td>
                                     <td><?= $row->subject ?></td>
                                     <td><?= $row->message ?></td>
-                                    <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button></td>
+                                    <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button></td>
                                 </tr><?php } ?>
                             </tbody>
                         </table>

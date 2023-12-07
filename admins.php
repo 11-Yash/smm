@@ -29,7 +29,7 @@
             }
         } else {
             if (empty($password)) {
-                $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email' WHERE `id`='$id'";
+                $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email' WHERE `srno`='$id'";
             } else {
                 $sql = "UPDATE `admins` SET `fname`='$fname',`lname`='$lname',`email`='$email',`password`='$password' WHERE `id`='$id'";
             }
@@ -43,7 +43,7 @@
 
     if (isset($_POST['deleteId'])) {
         $id = secure($_POST['deleteId']);
-        $sql = "DELETE FROM `admins` WHERE `id`='$id'";
+        $sql = "DELETE FROM `admins` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
             $_SESSION['success'] = "Admin Deleted Successfully";
         } else {
@@ -95,8 +95,8 @@
                                         <td><?= $row->lname ?></td>
                                         <td><?= $row->email ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->id ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>'><i class="fa-solid fa-edit"></i></button>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->srno ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>'><i class="fa-solid fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
