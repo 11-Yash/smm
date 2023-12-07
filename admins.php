@@ -24,6 +24,8 @@
             $sql = "INSERT INTO `admins`(`fname`, `lname`, `email`, `password`) VALUES ('$fname','$lname','$email','$password')";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Admin Added Successfully";
+                header("Location: admins.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -35,6 +37,8 @@
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Admin Updated Successfully";
+                header("Location: admins.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -46,6 +50,8 @@
         $sql = "DELETE FROM `admins` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
             $_SESSION['success'] = "Admin Deleted Successfully";
+            header("Location: admins.php");
+            exit();
         } else {
             $_SESSION['error'] = "Something Went Wrong";
         }
