@@ -26,7 +26,31 @@ include('required/config.php');
                 $sql = "INSERT INTO doodle(name, image_path) VALUES ('$name','$image_path')";
                 
             } else {
+                if (empty($image_name)){
+                    $sql = "UPDATE doodle SET name='$name' WHERE srno='$id'";
+                }
+                else{
+                $sql = "SELECT image_path FROM doodle WHERE srno='$id'";
+                $result = $mysqli->query($sql);
+                if ($result) {
+                    $row = $result->fetch_assoc();
+                    $old_image = $row['image_path'];
+                
+                    if (file_exists($old_image)) {
+                        if (unlink($old_image)) {
+                            echo 'File deleted successfully.';
+                        } else {
+                            echo 'Unable to delete the file.';
+                        }
+                    } else {
+                        echo 'File does not exist.';
+                    }
+                } else {
+                    echo "Error executing query: " . $mysqli->error;
+                }
+
                 $sql = "UPDATE doodle SET name='$name',image_path='$image_path' WHERE srno='$id'";
+                }
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Successfully";
@@ -45,8 +69,8 @@ include('required/config.php');
             if (isset($_POST['deleteId'])) {
             $id = secure($_POST['deleteId']);
             //deletion of image starts here
-            $getpathsql = "SELECT image_path FROM doodle WHERE srno = '$id'";
-            $result = $mysqli->query($getpathsql);
+            $sql = "SELECT image_path FROM doodle WHERE srno = '$id'";
+            $result = $mysqli->query($sql);
             if ($result) {
                 $row = $result->fetch_assoc();
                 $imagePath = $row['image_path'];
@@ -161,7 +185,7 @@ include('required/config.php');
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="doodle" class="form-label">doodle</label>
-                                    <input type="file" class="form-control" name="doodle" id="doodle" aria-describedby="helpId">
+                                    <input type="file" class="form-control" name="doodle" id="doodle" aria-describedby="helpId" value="">
                                 </div>
                             </div>
                         </div>
