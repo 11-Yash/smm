@@ -44,6 +44,24 @@ include('required/config.php');
         }}
             if (isset($_POST['deleteId'])) {
             $id = secure($_POST['deleteId']);
+            $getpathsql = "SELECT image_path FROM doodle WHERE srno = '$id'";
+            $result = $mysqli->query($getpathsql);
+            if ($result) {
+                $row = $result->fetch_assoc();
+                $imagePath = $row['image_path'];
+            
+                if (file_exists($imagePath)) {
+                    if (unlink($imagePath)) {
+                        echo 'File deleted successfully.';
+                    } else {
+                        echo 'Unable to delete the file.';
+                    }
+                } else {
+                    echo 'File does not exist.';
+                }
+            } else {
+                echo "Error executing query: " . $mysqli->error;
+            }            
             $sql = "DELETE FROM doodle WHERE srno='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Doodle Deleted Successfully";
