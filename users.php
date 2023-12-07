@@ -93,8 +93,8 @@
                                     <td><?= $row->email ?></td>
                                     <td><?= $row->contact ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->id ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>' data-contact='<?= $row->contact ?>'><i class="fa-solid fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->srno ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>' data-contact='<?= $row->contact ?>'><i class="fa-solid fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr><?php } ?>
                             </tbody>
