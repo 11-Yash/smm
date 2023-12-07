@@ -17,6 +17,8 @@
         $sql = "DELETE FROM `support` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
             $_SESSION['success'] = "Record Deleted Successfully";
+            header("Location: support.php");
+            exit();
         } else {
             $_SESSION['error'] = "Something Went Wrong";
         }

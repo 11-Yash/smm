@@ -23,7 +23,15 @@
         echo "Error: " . $mysqli->error;
     }?>
 
-    <!-- Post count PHP here -->
+    <?php
+    $sql = "SELECT COUNT(*) AS postCount FROM socialmediaposts";
+    $result = $mysqli->query($sql);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $postCount = $row['postCount'];
+    } else {
+        echo "Error: " . $mysqli->error;
+    }?>
 
     <?php
     $sql = "SELECT COUNT(*) AS adminCount FROM `admins`";
@@ -102,7 +110,9 @@
                         <div class="card m-1 my-2 shadow dashboard-card">
                             <div class="card-body">
                                 <i class="fa-solid fa-3x mt-2 fa-images float-end"></i>
-                                <h1>NO DB</h1>
+                                <h1>
+                                    <?php echo $postCount ?>
+                                </h1>
                                 <p>Social Media Posts</p>
                             </div>
                         </div>
