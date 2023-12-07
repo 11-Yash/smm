@@ -25,8 +25,6 @@
             $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Added Successfully";
-                header("Location: users.php");
-                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
@@ -34,12 +32,12 @@
             $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Updated Successfully";
-                header("Location: users.php");
-                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
         }
+        header("Location: users.php");
+        exit();
     }
 
     if (isset($_POST['deleteId'])) {
@@ -47,12 +45,13 @@
         $sql = "DELETE FROM `users` WHERE `srno`='$id'";
         if ($mysqli->query($sql)) {
             $_SESSION['success'] = "User Deleted Successfully";
-            header("Location: users.php");
-            exit();
         } else {
             $_SESSION['error'] = "Something Went Wrong";
         }
+        header("Location: users.php");
+                exit();
     }
+
 
     ?>
 
@@ -100,8 +99,8 @@
                                     <td><?= $row->email ?></td>
                                     <td><?= $row->contact ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->id ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>' data-contact='<?= $row->contact ?>'><i class="fa-solid fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->id ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row->srno ?>' data-fname='<?= $row->fname ?>' data-lname='<?= $row->lname ?>' data-email='<?= $row->email ?>' data-contact='<?= $row->contact ?>'><i class="fa-solid fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->fname . " " . $row->lname ?>'><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr><?php } ?>
                             </tbody>
