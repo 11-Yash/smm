@@ -1,4 +1,7 @@
-<?php include('required/config.php'); ?>
+<?php
+include('required/config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +13,36 @@
 </head>
 
 <body>
-    <?php include('required/navbar.php'); ?>
+    <?php include('required/navbar.php');
+        if (isset($_POST['modifyID']) && isset($_POST['name']) && isset($_POST['doodle'])) {
+            $id = secure($_POST['modifyID']);
+            $name = secure($_POST['name']);
+            $image_path = secure($_POST['doodle']);
+    
+            if (empty($id)) {
+                $sql = "INSERT INTO doodle(name, image_path) VALUES ('$name','$image_path')";
+
+            } else {
+                $sql = "UPDATE doodle SET name='$name',image_path='$image_path' WHERE srno='$id'";
+            }
+            if ($mysqli->query($sql)) {
+                $_SESSION['success'] = "Successfully";
+            } else {
+                $_SESSION['error'] = "Something Went Wrong";
+            }
+            
+           }
+
+            if (isset($_POST['deleteId'])) {
+            $id = secure($_POST['deleteId']);
+            $sql = "DELETE FROM doodle WHERE srno='$id'";
+            if ($mysqli->query($sql)) {
+                $_SESSION['success'] = "Doodle Deleted Successfully";
+            } else {
+                $_SESSION['error'] = "Something Went Wrong";
+            }
+        }
+    ?>
 
     <div class="container-fluid">
         <div class="row main-container">
@@ -40,21 +72,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $sql = "SELECT * FROM doodle";
+                                    $result = $mysqli->query($sql);
+                                    $sr = 0;
+                                    while ($row = $result->fetch_object()){
+                                        $sr++;
+                                ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Image Name</td>
+
+                                    <td> <?= $sr ?> </td>
+                                    <td> <?= $row->name ?> </td>
                                     <td>
+                                    <input type="hidden" name="modifyID" id="modifyID" value='0'>
                                         <div class="">
-                                            <a data-fancybox="post" href="assets/img/cat.png">
-                                                <img src="assets/img/cat.png" class="img-fluid rounded" alt="Image 1" width="50" />
+                                            <a data-fancybox="post" href="<?= $row->image_path ?> ">
+                                                <img src=<?= $row->image_path ?>  class="img-fluid rounded" alt="Image 1" width="50" />
                                             </a>
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='1' data-fname='Saqib' data-lname='Ghatte' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='1' data-title='Saqib Ghatte'><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal" data-id='<?= $row-> srno ?>' data-name='<?= $row->name ?>' data-lname='<?= $row->image_path ?>' data-email='saqibghatte@gmail.com' data-contact='9876543210'><i class="fa-solid fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDataModal" data-id='<?= $row->srno ?>' data-title='<?= $row->name ?>'><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>
+                                <?php } ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -74,11 +117,12 @@
                     <h5 class="modal-title" id="modalTitleId">Add Doodle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
+                                    <input type="hidden" name="modifyID" id="modifyID" value='0'>
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="Enter Name">
                                 </div>
@@ -93,10 +137,10 @@
                     </div>
                     <div class=" modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" name="submit">Save</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Save</button>
                     </div>
                 </form>
-            </div>
+            </div>  
         </div>
     </div>
 
@@ -108,14 +152,14 @@
                     <h5 class="modal-title" id="modalTitleId">Confirm Delete Doodle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="Doodle">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="modal-body">
                         Are you sure you want to delete <b><span id='title'>Doodle Name</span></b>?
                         <input type="hidden" name='deleteId'>
                     </div>
                     <div class=" modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                     </div>
                 </form>
             </div>
@@ -125,23 +169,28 @@
     <?php include('required/footer.php'); ?>
     <script>
         // On Edit Button Click
-        // $('#addDataModal').on('show.bs.modal', function(event) {
-        //     var button = $(event.relatedTarget)
-        //     var id = button.data('id')
-        //     var fname = button.data('fname')
-        //     var lname = button.data('lname')
-        //     var email = button.data('email')
-        //     var contact = button.data('contact')
-        //     var modal = $(this)
+        $('#addDataModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var name = button.data('name')
+            var image_path = button.data('image_path')
+            var modal = $(this)
+            modal.find('.modal-title').text((id == 0 || id == undefined) ? 'Add Doodle' : "Edit Doodle")
+            modal.find('.modal-body #modifyID').val(id)
+            modal.find('.modal-body #name').val(name)
+            modal.find('.modal-body #image_path').val(image_path)
+            modal.find('.modal-footer button[name=submit]').text((id == 0 || id == undefined) ? 'Save' : "Update")
+        })
 
-        //     modal.find('.modal-title').text((id == 0 || id == undefined) ? 'Add Doodle' : "Edit Doodle")
-        //     modal.find('.modal-body #modifyID').val(id)
-        //     modal.find('.modal-body #fname').val(fname)
-        //     modal.find('.modal-body #lname').val(lname)
-        //     modal.find('.modal-body #email').val(email)
-        //     modal.find('.modal-body #contact').val(contact)
-        //     modal.find('.modal-footer button[name=submit]').text((id == 0 || id == undefined) ? 'Save' : "Update")
-        // })
+
+        $('#deleteDataModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var title = button.data('title')
+            var modal = $(this)
+            modal.find('.modal-body #title').text(title)
+            modal.find('.modal-body input[name=deleteId]').val(id)
+        })
     </script>
 </body>
 
