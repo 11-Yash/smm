@@ -35,9 +35,10 @@ include('required/config.php');
             }
             
            }
+           if(isset($image_path)){
            if (move_uploaded_file($image_tmp, $image_path)) {
-            // File moved successfully
-            }
+            
+        }}
             if (isset($_POST['deleteId'])) {
             $id = secure($_POST['deleteId']);
             $sql = "DELETE FROM doodle WHERE srno='$id'";
