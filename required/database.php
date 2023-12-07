@@ -50,6 +50,13 @@ CREATE TABLE IF NOT EXISTS users (
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 ";
+$sqlSocialMediaPostsTable = "
+CREATE TABLE IF NOT EXISTS socialmediaposts (
+    srno INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT
+);
+";
 $sqlTrendingTable = "
 CREATE TABLE IF NOT EXISTS trending (
     srno INT AUTO_INCREMENT PRIMARY KEY,
@@ -82,6 +89,7 @@ CREATE TABLE IF NOT EXISTS doodle (
 if (
     $conn->query($sqlAdminsTable) === TRUE &&
     $conn->query($sqlUsersTable) === TRUE &&
+    $conn->query($sqlSocialMediaPostsTable) === TRUE &&
     $conn->query($sqlTrendingTable) === TRUE &&
     $conn->query($sqlSupportTable) === TRUE &&
     $conn->query($sqlDoodleTable) === TRUE
