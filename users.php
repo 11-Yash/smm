@@ -10,10 +10,9 @@
 </head>
 
 <body>
-    <?php include('required/navbar.php'); ?>
-
-    <?php
-    if(isset($_POST['modifyID']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['contact'])) {
+    <?php include('required/navbar.php');
+    
+    if (isset($_POST['modifyID']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['contact'])) {
         $id = secure($_POST['modifyID']);
         $fname = secure($_POST['fname']);
         $lname = secure($_POST['lname']);
@@ -21,21 +20,21 @@
         $contact = secure($_POST['contact']);
         $password = secure($_POST['password']);
     
-    if(empty($id)) {
-        $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
-        if ($mysqli->query($sql)) {
-            $_SESSION['success'] = "User Added Successfully";
+        if (empty($id)) {
+            $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
+            if ($mysqli->query($sql)) {
+                $_SESSION['success'] = "User Added Successfully";
+            } else {
+                $_SESSION['error'] = "Something Went Wrong";
+            }
         } else {
-            $_SESSION['error'] = "Something Went Wrong";
+            $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
+            if ($mysqli->query($sql)) {
+                $_SESSION['success'] = "User Updated Successfully";
+            } else {
+                $_SESSION['error'] = "Something Went Wrong";
+            }
         }
-    } else {
-        $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
-        if ($mysqli->query($sql)) {
-            $_SESSION['success'] = "User Updated Successfully";
-        } else {
-            $_SESSION['error'] = "Something Went Wrong";
-        }
-    }
     }
 
     if (isset($_POST['deleteId'])) {
@@ -117,7 +116,7 @@
                     <h5 class="modal-title" id="modalTitleId">Add User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -155,7 +154,7 @@
                     </div>
                     <div class=" modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" name="submit">Save</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Save</button>
                     </div>
                 </form>
             </div>
