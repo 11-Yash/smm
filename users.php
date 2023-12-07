@@ -16,6 +16,8 @@
         $id = secure($_POST['modifyID']);
         $fname = secure($_POST['fname']);
         $lname = secure($_POST['lname']);
+
+//fdsfnj
         $email = secure($_POST['email']);
         $contact = secure($_POST['contact']);
         $password = secure($_POST['password']);
