@@ -228,7 +228,6 @@
         
         var nameRegex = /^[A-Z][a-z]*$/;
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
         
         if (!nameRegex.test(fname)) {
             alert('Please enter a valid first name with the first letter being capital but any illegal characters');
@@ -244,9 +243,13 @@
             alert('Please enter a valid email address.');
             return false;
         }
-        if (!passwordRegex.test(password)) {
-            alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters');
-            return false;
+
+        if(password!=""){
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert('Password should be at least 8 characters long and contain at least one letter and one digit. Avoid using illegal characters.');
+                return false;
+            }
         }
     
         return true;

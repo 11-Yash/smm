@@ -1,6 +1,5 @@
-<?php include('required/config.php');?>
-<?php include('required/checklog.php');?>
-
+<?php include('required/config.php'); ?>
+<?php include('required/checklog.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +123,7 @@
                     <h5 class="modal-title" id="modalTitleId">Add User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return validateForm()">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -223,48 +222,6 @@
             modal.find('.modal-body #title').text(title)
             modal.find('.modal-body input[name=deleteId]').val(id)
         })
-
-        //form validation
-    function validateForm() {
-        var fname = $('#fname').val();
-        var lname = $('#lname').val();
-        var email = $('#email').val();
-        var password = $('#password').val();
-        var contact = $('#contact').val();
-
-        // Regular expression for validation with first letter capitalization
-        var nameRegex = /^[A-Z][a-z]*$/;
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-        var contactRegex = /^\d{10}$/;
-
-        if (!nameRegex.test(fname)) {
-            alert('Please enter a valid first name with the first letter capitalized.');
-            return false;
-        }
-
-        if (!nameRegex.test(lname)) {
-            alert('Please enter a valid last name with the first letter capitalized.');
-            return false;
-        }
-
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return false;
-        }
-
-        if (!passwordRegex.test(password)) {
-            alert('Password should be at least 8 characters long and contain at least one letter and one digit. Avoid using illegal characters.');
-            return false;
-        }
-
-        if (!contactRegex.test(contact)) {
-            alert('Please enter a valid 10-digit contact number.');
-            return false;
-        }
-
-        return true;
-    }
     </script>
 </body>
 
