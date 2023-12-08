@@ -18,7 +18,7 @@
         $fname = secure($_POST['fname']);
         $lname = secure($_POST['lname']);
         $email = secure($_POST['email']);
-        $password = secure($_POST['password']);
+        $password = Encrypt(secure($_POST['password']));
 
         if (empty($id)) {
             $sql = "INSERT INTO `admins`(`fname`, `lname`, `email`, `password`) VALUES ('$fname','$lname','$email','$password')";

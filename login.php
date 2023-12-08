@@ -10,8 +10,8 @@ if (isset($_POST['login'])) {
     $remember = isset($_POST['remember']) ? 1 : 0;
 
     // delete this code later
-    header('location: index.php');
-    exit();
+    // header('location: index.php');
+    // exit();
 
     $sql = "SELECT * FROM admins WHERE email = '$email' AND password = '$password'";
     $result = $mysqli->query($sql);
