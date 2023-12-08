@@ -126,7 +126,7 @@
                     <h5 class="modal-title" id="modalTitleId">addDataModalmin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return validateForm()">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -216,6 +216,41 @@
             modal.find('.modal-body #title').text(title)
             modal.find('.modal-body input[name=deleteId]').val(id)
         })
+
+        //form validation
+        function validateForm() {
+        var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        
+            // Simple regular expressions for validation
+            var nameRegex = /^[A-Z][a-z]*$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!nameRegex.test(fname)) {
+                alert('Please enter a valid first name.');
+                return false;
+            }
+        
+            if (!nameRegex.test(lname)) {
+                alert('Please enter a valid last name.');
+                return false;
+            }
+        
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
+                return false;
+            }
+        
+            return true;
+        }
     </script>
 </body>
 
