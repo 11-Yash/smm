@@ -20,7 +20,7 @@
         $lname = secure($_POST['lname']);
         $email = secure($_POST['email']);
         $contact = secure($_POST['contact']);
-        $password = secure($_POST['password']);
+        $password = Encrypt(secure($_POST['password']));
     
         if (empty($id)) {
             $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
