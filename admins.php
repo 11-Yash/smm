@@ -229,12 +229,12 @@
         var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
         
         if (!nameRegex.test(fname)) {
-            alert('Please enter a valid first name.');
+            alert('Please enter a valid first name with the first letter being capital but any illegal characters');
             return false;
         }
     
         if (!nameRegex.test(lname)) {
-            alert('Please enter a valid last name.');
+            alert('Please enter a valid last name with the first letter being capital but any illegal characters');
             return false;
         }
     
@@ -243,7 +243,7 @@
             return false;
         }
         if (!passwordRegex.test(password)) {
-            alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
+            alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters');
             return false;
         }
     
