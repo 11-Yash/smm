@@ -13,10 +13,10 @@
 
 <body>
     <?php include('required/navbar.php');
-            var_dump($_POST);
+            // var_dump($_POST);
         
         if (isset($_POST['modifyID']) && isset($_FILES['post']) && isset($_POST['title']) && isset($_POST['desc']) && isset($_POST['scheduleDate']) && isset($_POST['scheduleTime'])) { // && isset($_POST['platform'])
-            var_dump($_POST);
+            // var_dump($_POST);
             $id = secure($_POST['modifyID']);
             $title = secure($_POST['title']);
             $desc = secure($_POST['desc']);
@@ -31,13 +31,13 @@
             if (empty($id)) {
                 $sql = "INSERT INTO socialmediaposts(title, description, post, schdate, schtime) VALUES ('$title','$desc','$image_path','$scheduleDate','$scheduleTime')"; //,'$platform'    , platform
             } else {
-                if (empty($image_name)){
-                    $sql = "UPDATE socialmediaposts SET title='$tile', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime', platform='$platform' WHERE srno='$id'";                    
+                if (empty($image_name) || empty($scheduleDate) || empty($scheduleTime)){
+                    $sql = "UPDATE socialmediaposts SET title='$title', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime'  WHERE srno='$id'";        //,platform='$platform'            
                 }
                 else{
                 $sql = "SELECT post FROM socialmediaposts WHERE srno='$id'";
                 $result = $mysqli->query($sql);
-                    if ($result) {
+                if ($result) {
                         $row = $result->fetch_assoc();
                     $old_image = $row['post'];
                 
@@ -53,9 +53,9 @@
                 } else {
                     echo "Error executing query: " . $mysqli->error;
                 }
-
-                $sql = "UPDATE socialmediaposts SET title='$tile', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime', platform='$platform' ,post='$image_path' WHERE srno='$id'";
+                $sql = "UPDATE socialmediaposts SET title='$title', description='$desc', schdate='$scheduleDate', schtime='$scheduleTime', platform='$platform' ,post='$image_path' WHERE srno='$id'";
                 }
+
             }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "Successfully";
