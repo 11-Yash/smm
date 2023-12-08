@@ -1,18 +1,16 @@
-<?php include('required/config.php');
-if (isset($_SESSION['admin_id'])) {
+
+<?php 
+
+
+include('required/config.php');
+if (isset($_SESSION['admin_name'])) {
     header('location: index.php');
     exit();
 }
-
 if (isset($_POST['login'])) {
     $email = secure($_POST['email']);
     $password = Encrypt(secure($_POST['password']));
     $remember = isset($_POST['remember']) ? 1 : 0;
-
-    // delete this code later
-    // header('location: index.php');
-    // exit();
-
     $sql = "SELECT * FROM admins WHERE email = '$email' AND password = '$password'";
     $result = $mysqli->query($sql);
     if ($result->num_rows > 0) {

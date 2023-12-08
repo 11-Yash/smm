@@ -6,6 +6,8 @@ session_start();
 $mysqli = new mysqli("localhost", "root", "", "socialmediamanager");
 if ($mysqli->connect_error) {
     exit('Could not connect');
+
+
 }
 
 // isLoggedin
@@ -39,3 +41,5 @@ function formatTime($date)
 {
     return date('h:i A', strtotime($date));
 }
+
+?>

@@ -1,4 +1,6 @@
 <?php include('required/config.php'); ?>
+<?php include('required/checklog.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
