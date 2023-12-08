@@ -26,19 +26,25 @@
             $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `contact`,`password`) VALUES('$fname','$lname','$email','$contact','$password')";
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Added Successfully";
+                header("Location: users.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
         } else {
-            $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
+            if (empty($password)) {
+                $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact' WHERE `srno`='$id'";
+            } else {
+                $sql = "UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact',`password`='$password' WHERE `srno`='$id'";
+            }
             if ($mysqli->query($sql)) {
                 $_SESSION['success'] = "User Updated Successfully";
+                header("Location: users.php");
+                exit();
             } else {
                 $_SESSION['error'] = "Something Went Wrong";
             }
         }
-        header("Location: users.php");
-        exit();
     }
 
     if (isset($_POST['deleteId'])) {
@@ -123,7 +129,7 @@
                     <h5 class="modal-title" id="modalTitleId">Add User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return validateForm()">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -222,6 +228,50 @@
             modal.find('.modal-body #title').text(title)
             modal.find('.modal-body input[name=deleteId]').val(id)
         })
+
+        //form validation
+    function validateForm() {
+        var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var contact = $('#contact').val();
+
+        // Regular expression for validation with first letter capitalization
+        var nameRegex = /^[A-Z][a-z]*$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var contactRegex = /^\d{10}$/;
+
+        if (!nameRegex.test(fname)) {
+            alert('Please enter a valid first name with the first letter being capital but any illegal characters');
+            return false;
+        }
+
+        if (!nameRegex.test(lname)) {
+            alert('Please enter a valid last name with the first letter being capital but any illegal characters');
+            return false;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return false;
+        }
+
+        if(password!=""){
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
+                return false;
+            }
+        }
+
+        if (!contactRegex.test(contact)) {
+            alert('Please enter a valid 10-digit contact number.');
+            return false;
+        }
+
+        return true;
+    }
     </script>
 </body>
 

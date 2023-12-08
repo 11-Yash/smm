@@ -221,38 +221,38 @@
 
         //form validation
         function validateForm() {
-        var fname = $('#fname').val();
-        var lname = $('#lname').val();
-        var email = $('#email').val();
-        var password = $('#password').val();
-        
-        var nameRegex = /^[A-Z][a-z]*$/;
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!nameRegex.test(fname)) {
-            alert('Please enter a valid first name with the first letter being capital but any illegal characters');
-            return false;
-        }
-    
-        if (!nameRegex.test(lname)) {
-            alert('Please enter a valid last name with the first letter being capital but any illegal characters');
-            return false;
-        }
-    
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return false;
-        }
-
-        if(password!=""){
-            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                alert('Password should be at least 8 characters long and contain at least one letter and one digit. Avoid using illegal characters.');
+            var fname = $('#fname').val();
+            var lname = $('#lname').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+            
+            var nameRegex = /^[A-Z][a-z]*$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!nameRegex.test(fname)) {
+                alert('Please enter a valid first name with the first letter being capital but any illegal characters');
                 return false;
             }
-        }
-    
-        return true;
+        
+            if (!nameRegex.test(lname)) {
+                alert('Please enter a valid last name with the first letter being capital but any illegal characters');
+                return false;
+            }
+        
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if(password!=""){
+                var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordRegex.test(password)) {
+                    alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
+                    return false;
+                }
+            }
+        
+            return true;
         }
     </script>
 </body>
