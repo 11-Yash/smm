@@ -224,32 +224,30 @@
         var email = $('#email').val();
         var password = $('#password').val();
         
-            // Simple regular expressions for validation
-            var nameRegex = /^[A-Z][a-z]*$/;
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-
-            if (!nameRegex.test(fname)) {
-                alert('Please enter a valid first name.');
-                return false;
-            }
+        var nameRegex = /^[A-Z][a-z]*$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
         
-            if (!nameRegex.test(lname)) {
-                alert('Please enter a valid last name.');
-                return false;
-            }
-        
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
-                return false;
-            }
-
-            if (!passwordRegex.test(password)) {
-                alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
-                return false;
-            }
-        
-            return true;
+        if (!nameRegex.test(fname)) {
+            alert('Please enter a valid first name.');
+            return false;
+        }
+    
+        if (!nameRegex.test(lname)) {
+            alert('Please enter a valid last name.');
+            return false;
+        }
+    
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return false;
+        }
+        if (!passwordRegex.test(password)) {
+            alert('Password should be at least 8 characters long and contain at least one letter and one digit but any illegal characters.');
+            return false;
+        }
+    
+        return true;
         }
     </script>
 </body>
