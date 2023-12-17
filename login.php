@@ -1,15 +1,23 @@
 
 <?php 
-
-
 include('required/config.php');
-if (isset($_SESSION['admin_name'])) {
+
+if(isset($_COOKIE['remember_user']) && isset($_COOKIE['remember_password'])){
+    // $remember_user = $_COOKIE['remember_user'];
+    // $remember_password = $_COOKIE['remember_password'];
     header('location: index.php');
     exit();
 }
+
+
+// if (isset($_SESSION['admin_name'])) {
+//     header('location: index.php');
+//     exit();
+// }
 if (isset($_POST['login'])) {
     $email = secure($_POST['email']);
     $password = Encrypt(secure($_POST['password']));
+    $password_chk = (secure($_POST['password']));
     $remember = isset($_POST['remember']) ? 1 : 0;
     $sql = "SELECT * FROM admins WHERE email = '$email' AND password = '$password'";
     $result = $mysqli->query($sql);
@@ -18,12 +26,19 @@ if (isset($_POST['login'])) {
         $_SESSION['admin_id'] = $row['id'];
         $_SESSION['admin_name'] = $row['fname'] . ' ' . $row['lname'];
         $_SESSION['admin_email'] = $row['email'];
+        $_SESSION['admin_password'] = $row['password'];
         $_SESSION['admin_role'] = $row['role'];
         if ($remember == 1) {
             setcookie('admin_id', $row['id'], time() + (86400 * 30), "/");
             setcookie('admin_name', $row['fname'] . ' ' . $row['lname'], time() + (86400 * 30), "/");
             setcookie('admin_email', $row['email'], time() + (86400 * 30), "/");
             setcookie('admin_role', $row['role'], time() + (86400 * 30), "/");
+            setcookie('remember_user',$email,time() + (60*60*24*30));
+            setcookie('remember_password',$password,time() + (60*60*24*30));
+        }
+        else{
+            setcookie('remember_user','',time() - (60*60*24));
+            setcookie('remember_password','',time() - (60*60*24));
         }
         header('location: index.php');
         exit();

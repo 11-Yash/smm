@@ -1,4 +1,11 @@
-<?php $admin_name = $_SESSION['admin_name']; ?>
+<?php 
+if(isset($_COOKIE['admin_name'])){
+$admin_name = $_COOKIE['admin_name'];
+}
+elseif(isset($_SESSION['admin_name'])){
+    $admin_name = $_SESSION['admin_name'];
+}
+ ?>
 <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
         <div class="container-fluid">
